@@ -5,7 +5,9 @@ const withNextIntl = createNextIntlPlugin();
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    Image
+    images: {
+        domains: ['localhost'],
+    }
 };
  
 export default withNextIntl(nextConfig);

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
@@ -7,8 +7,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import Header from "@/Components/header";
 
-const rubik = Rubik({
-  variable: "--font-geist-sans",
+const rubik = Poppins({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
@@ -32,9 +32,9 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <html lang={locale}>
-      <body className={`${rubik.variable} antialiased`}>
+      <body className={`${rubik.className} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <Header/>
+          <Header />
           {children}
         </NextIntlClientProvider>
       </body>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import useCategory from "@/hooks/useCategory";
 import { useTranslations } from "next-intl";
@@ -10,8 +11,7 @@ import { SiOpensearch } from "react-icons/si";
 
 export default function Header() {
   const t = useTranslations("header");
-  const { category } = useCategory();
-  console.log(category);
+  const { category } = useCategory(7);
   return (
     <header className="bg-white px-4 md:px-0">
       {/* top */}
@@ -34,7 +34,7 @@ export default function Header() {
 
         <div className="hidden items-center gap-2 opacity-80 md:flex">
           <HiOutlineViewGridAdd size={30} />
-          <h3 className="text-lg font-thin">Category</h3>
+          <h3 className="text-lg">Category</h3>
         </div>
         {/* mobile Button */}
         <button className="grid size-11 place-content-center rounded-md bg-primary text-white md:hidden">
@@ -44,14 +44,14 @@ export default function Header() {
       <hr className="h-[0.5px] border-black/25" />
 
       <div className="container hidden h-20 items-center justify-between md:flex">
-        {category.map((item, index) => (
+        {category.map((item:any) => (
           <Link
             key={item?.id}
             className="flex h-full flex-grow items-center justify-center gap-2 border-e-[0.5px] border-s-[0.5px] border-black/10 opacity-85 transition-all hover:bg-primary hover:text-white"
             href={"/"}
           >
-            <div className="size-8 bg-red-400">
-                <Image width={32} height={32} alt={item.name} src={item.image} />
+            <div className="size-8">
+                <Image width={32} height={32} alt={item?.name} src={item?.image} />
             </div>
             <h3 className="text-md font-medium">{item?.name}</h3>
           </Link>
