@@ -23,6 +23,7 @@ interface Get_appPropt {
   subCategory?: string;
   perPage?: number;
   page?: number;
+  topDownloads:boolean
 }
 
 const get_application = async ({
@@ -30,10 +31,11 @@ const get_application = async ({
   search,
   category,
   page = 1,
+  topDownloads=false,
 }: Get_appPropt) => {
   const filter = `${search ? `&search=${search}` : ""}${category ? `&category=${category}` : ""}`;
   const res = await FetchHalper(
-    `program?perPage=${perPage}&page=${page}${filter}`,
+    `program?perPage=${perPage}&page=${page}&topDownloads=${topDownloads}${filter}`,
   );
   if (!res || !Array.isArray(res)) return;
   return res?.map((item: any) => ({

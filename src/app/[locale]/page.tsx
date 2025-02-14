@@ -5,8 +5,16 @@ import { AiOutlineCloudDownload } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
 
 export default async function Home() {
-  const windows = await get_application({ perPage: 10 });
-  const pc_games = await get_application({ perPage: 10,category:"PC Games" });
+  const windows = await get_application({
+    perPage: 10,
+    category: "Windows",
+    topDownloads: true,
+  });
+  const pc_games = await get_application({
+    perPage: 10,
+    category: "PC Games",
+    topDownloads: true,
+  });
   console.log(windows);
 
   return (
@@ -29,7 +37,7 @@ export default async function Home() {
                   className="flex flex-col items-center justify-between gap-3 border border-black/10 bg-white p-3 md:flex-row"
                 >
                   <div className="flex w-full max-w-[500px] gap-2">
-                    <div className="aspect-square overflow-hidden rounded-md bg-red-400">
+                    <div className="aspect-square min-w-[74px] overflow-hidden rounded-md bg-gray-200">
                       <Image
                         className="size-full object-cover"
                         width={74}
@@ -38,11 +46,11 @@ export default async function Home() {
                         src={item?.images[0]}
                       />
                     </div>
-                    <div>
-                      <h3 className="text-md font-medium text-black">
+                    <div className="space-y-1">
+                      <h3 className="text-md line-clamp-2 font-medium text-black">
                         {item?.title}
                       </h3>
-                      <p className="line-clamp-1 text-sm opacity-50">
+                      <p className="line-clamp-1 text-xs opacity-75">
                         {item?.subtitle}
                       </p>
                       <p className="text-sm text-primary">
@@ -110,13 +118,29 @@ export default async function Home() {
           <div>
             {pc_games?.map((item, index) => (
               <div key={index} className="mt-7 flex gap-2">
-                <div className="size-16 aspect-square bg-red-600">ddf</div>
+                <div className="aspect-square min-w-[74px] overflow-hidden rounded-md bg-gray-200">
+                  <Image
+                    className="size-full object-cover"
+                    width={74}
+                    height={74}
+                    alt={item?.title}
+                    src={item?.images[0]}
+                  />
+                </div>
                 <div>
-                  <h3 className="text-base line-clamp-1">{item.title}</h3>
-                  <p className="text-xs font-semibold text-primary">{item.category.name}</p>
+                  <h3 className="line-clamp-1 text-base">{item.title}</h3>
+                  <p className="text-xs font-semibold text-primary">
+                    {item.category.name}
+                  </p>
                   <div className="flex gap-1 text-black">
-                    <p className="text-lg font-bold">12.4</p>
-                    <span className="text-xs opacity-85">gb</span>
+                    <p className="text-lg font-bold">
+                      {" "}
+                      {item.size.split(" ")[0]}
+                    </p>
+                    <span className="text-xs opacity-85">
+                      {" "}
+                      {item.size.split(" ")[1]}
+                    </span>
                   </div>
                 </div>
               </div>
