@@ -118,11 +118,9 @@ export default async function Home({
                         </>
                       )}
                       <div className="flex gap-1 text-black">
-                        <h3 className="text-nowrap text-2xl">
-                          {item.size.split(" ")[0]}
-                        </h3>
+                        <h3 className="text-nowrap text-2xl">{item.size}</h3>
                         <span className="text-xs opacity-85">
-                          {item.size.split(" ")[1]}
+                          {item.sizeType}
                         </span>
                       </div>
                     </div>
@@ -212,11 +210,9 @@ export default async function Home({
                       </>
                     )}
                     <div className="flex gap-1 text-black">
-                      <h3 className="text-nowrap text-2xl">
-                        {item.size.split(" ")[0]}
-                      </h3>
+                      <h3 className="text-nowrap text-2xl">{item?.size}</h3>
                       <span className="text-xs opacity-85">
-                        {item.size.split(" ")[1]}
+                        {item?.sizeType}
                       </span>
                     </div>
                   </div>
@@ -306,11 +302,9 @@ export default async function Home({
                       </>
                     )}
                     <div className="flex gap-1 text-black">
-                      <h3 className="text-nowrap text-2xl">
-                        {item.size.split(" ")[0]}
-                      </h3>
+                      <h3 className="text-nowrap text-2xl">{item.size}</h3>
                       <span className="text-xs opacity-85">
-                        {item.size.split(" ")[1]}
+                        {item.sizeType}
                       </span>
                     </div>
                   </div>
@@ -320,13 +314,16 @@ export default async function Home({
           </div>
         </div>
 
-        {/* sidbar */}
         <div className="sticky top-10 mt-10 h-fit bg-white p-5 lg:w-[470px]">
           <h2 className="text-2xl">Pc Games</h2>
           <hr />
           <div>
             {pc_games?.map((item, index) => (
-              <div key={index} className="mt-7 flex gap-2">
+              <Link
+                href={`/${locale}/${item.category.name}/${item.slug}`}
+                key={index}
+                className="mt-7 flex gap-2"
+              >
                 <div className="aspect-square min-w-[74px] overflow-hidden rounded-md bg-gray-200">
                   <Image
                     className="size-full object-cover"
@@ -352,7 +349,7 @@ export default async function Home({
                     </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
