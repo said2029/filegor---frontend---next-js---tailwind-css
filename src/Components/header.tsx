@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import useCategory from "@/hooks/useCategory";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -12,8 +12,9 @@ import { SiOpensearch } from "react-icons/si";
 export default function Header() {
   const t = useTranslations("header");
   const { category } = useCategory(7);
+  const locale = useLocale();
   return (
-    <header className="bg-white px-4 md:px-0">
+    <header className="w-screen bg-white px-4 md:px-0">
       {/* top */}
       <div className="container flex items-center justify-between py-4">
         <div className="flex items-center gap-3">
@@ -44,14 +45,19 @@ export default function Header() {
       <hr className="h-[0.5px] border-black/25" />
 
       <div className="container hidden h-20 items-center justify-between md:flex">
-        {category.map((item:any) => (
+        {category.map((item: any) => (
           <Link
             key={item?.id}
             className="flex h-full flex-grow items-center justify-center gap-2 border-e-[0.5px] border-s-[0.5px] border-black/10 opacity-85 transition-all hover:bg-primary hover:text-white"
-            href={"/"}
+            href={`/${locale}/${item.name}`}
           >
             <div className="size-8">
-                <Image width={32} height={32} alt={item?.name} src={item?.image} />
+              <Image
+                width={32}
+                height={32}
+                alt={item?.name}
+                src={item?.image}
+              />
             </div>
             <h3 className="text-md font-medium">{item?.name}</h3>
           </Link>

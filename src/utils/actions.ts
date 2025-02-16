@@ -29,6 +29,18 @@ const get_Categories = async (perPage = 10) => {
   }));
 };
 
+const get_SubCategories = async (perPage = 10) => {
+  const res = await FetchHalper(`sub-category?perPage=${perPage}`);
+  if (!res) return null;
+  return res.map((item: any) => ({
+    ...item,
+    image: `${BACKENDURL}/upload/${item.image}`,
+  }));
+};
+
+
+
+
 interface Get_appPropt {
   search?: string;
   category?: string;
@@ -37,7 +49,6 @@ interface Get_appPropt {
   page?: number;
   topDownloads: boolean;
 }
-
 const get_application = async ({
   perPage = 10,
   search,
@@ -58,4 +69,4 @@ const get_by_slug = async (slug: string) => {
   return GenerateProgram(res);
 };
 
-export { get_Categories, get_application,get_by_slug };
+export { get_Categories, get_application,get_by_slug,get_SubCategories };

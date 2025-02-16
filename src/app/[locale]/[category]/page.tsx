@@ -1,0 +1,99 @@
+import Main_Card from "@/Components/Cards/Main_Card";
+import {
+  get_application,
+  get_Categories,
+  get_SubCategories,
+} from "@/utils/actions";
+import Link from "next/link";
+import React from "react";
+
+export default async function page({ params }: { params: any }) {
+  const { category, locale } = await params;
+  const applications = await get_application({
+    category: category,
+    topDownloads: false,
+  });
+
+  const categoris = await get_Categories();
+  const Subcategoris = await get_SubCategories();
+  return (
+    <main>
+      <div className="w-screen bg-gradient-to-r from-blue-500 to-teal-500 py-5">
+        <div className="container flex flex-col items-center justify-between gap-2 text-center md:flex-row md:text-start">
+          <h1 className="text-2xl text-white">{decodeURI(category)}</h1>
+          <div>
+            <ul className="flex space-x-2 text-white">
+              <li>
+                <Link href={"/"}>Home</Link>{" "}
+              </li>
+              <li>{">"}</li>
+              <li>
+                <Link href={`/${decodeURI(category)}`}>
+                  {decodeURI(category)}
+                </Link>
+              </li>
+              <li>{">"}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <section className="container mt-10 grid w-screen lg:grid-cols-3 lg:gap-10">
+        <aside className="space-y-6 px-4 md:px-0">
+          <div className="max-h-[500px] w-full overflow-y-auto rounded-lg border border-black/10 bg-white px-5 py-5">
+            <h1 className="text-xl font-medium text-black opacity-80">
+              Primary Category
+            </h1>
+            <hr className="my-5" />
+            <div className="space-y-7">
+              {categoris?.map((cat: any) => (
+                <div key={cat.id} className="flex items-center gap-4">
+                  <input
+                    className="size-5 appearance-none rounded-md bg-gray-300/75 checked:bg-teal-400"
+                    type="checkbox"
+                  />
+                  <p className="text-sm">{cat.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="max-h-[500px] w-full overflow-y-auto rounded-lg border border-black/10 bg-white px-5 py-5">
+            <h1 className="text-xl font-medium text-black opacity-80">
+              Primary SubCategory
+            </h1>
+            <hr className="my-5" />
+            <div className="space-y-7">
+              {Subcategoris?.map((cat: any) => (
+                <div key={cat.id} className="flex items-center gap-4">
+                  <input
+                    className="size-5 appearance-none rounded-md bg-gray-300/75 checked:bg-teal-400"
+                    type="checkbox"
+                  />
+                  <p className="text-sm">{cat.name}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+        <main className="w-screen px-4 md:px-0 lg:col-span-2 lg:w-full">
+          <div className="flex w-full items-center justify-between border-s-[6px] border-primary bg-white px-5 py-4">
+            <h3 className="text-xl font-medium">{decodeURI(category)}</h3>
+            {/* <Link href={"/"} className="rounded-sm border px-2 py-1 opacity-80">
+              View All
+            </Link> */}
+          </div>
+          <div className="mt-5">
+            {applications?.map((item) => (
+              <Main_Card key={item.id} item={item} locale={locale} />
+            ))}
+          </div>
+
+          <div className="flex w-full items-center justify-between mt-10">
+            <Link href={""} className="px-5 py-2 bg-black text-white">Previews</Link>
+            <Link href={""} className="px-5 py-2 bg-black text-white">Next</Link>
+          </div>
+        </main>
+      </section>
+    </main>
+  );
+}
