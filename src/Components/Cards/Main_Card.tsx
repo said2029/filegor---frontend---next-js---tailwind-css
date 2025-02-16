@@ -32,22 +32,26 @@ export default function Main_Card({
             {item?.title}
           </h3>
           <p className="line-clamp-1 text-xs opacity-75">{item?.subtitle}</p>
-          <p className="text-sm text-primary">{item?.subCategory?.[0]?.name}</p>
+          <p
+            className="text-sm text-primary"
+          >
+            {item?.category.name}
+          </p>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-5 lg:flex-nowrap">
+      <div className="flex flex-wrap items-center justify-between gap-5 lg:flex-nowrap h-full">
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-1">
-            <span className="block size-9">
+            <span className="block size-4">
               <Image
-                width={30}
-                height={30}
+                width={20}
+                height={20}
                 alt={item?.category?.name}
                 src={item?.category?.image}
               />
             </span>
-            <h3>{item?.category?.name}</h3>
+            <h3 className="text-xs text-teal-600">{item?.category?.name}</h3>
           </div>
           <div className="flex items-center gap-2">
             <span className="block size-4">
@@ -56,7 +60,8 @@ export default function Main_Card({
             <p className="text-xs">{item?.downloads}</p>
           </div>
         </div>
-        <hr className="h-full border-2 border-black" />
+
+        <hr className="h-full border border-black" />
         {item?.rate != 0 && (
           <>
             <div className="space-y-2 text-center">
@@ -71,7 +76,7 @@ export default function Main_Card({
           </>
         )}
         <div className="flex gap-1 text-black">
-          <h3 className="text-nowrap text-2xl">{item.size}</h3>
+          <h3 className="text-4xl opacity-80">{item.size}</h3>
           <span className="text-xs opacity-85">{item.sizeType}</span>
         </div>
       </div>

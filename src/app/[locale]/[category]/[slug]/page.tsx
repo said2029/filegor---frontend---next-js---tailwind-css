@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Slider_Images from "@/Components/slider_Images";
 import { get_application, get_by_slug } from "@/utils/actions";
 import Image from "next/image";
@@ -7,11 +8,8 @@ import { CiClock2 } from "react-icons/ci";
 import { FaDownload } from "react-icons/fa";
 import { SiUtorrent } from "react-icons/si";
 
-export default async function page({
-  params: { slug, category, locale },
-}: {
-  params: { slug: string; category: string; locale: string };
-}) {
+export default async function page({ params }: { params: any }) {
+  const { slug, category, locale } = await params;
   const program = await get_by_slug(slug);
   const related = await get_application({
     topDownloads: true,
@@ -193,7 +191,7 @@ export default async function page({
                 <li className="flex items-center justify-between gap-5">
                   <h5 className="text-sm font-medium opacity-75">Version</h5>
                   <p className="text-xs font-semibold opacity-70">
-                    {program?.versions?.[0].versionName}
+                    {program?.versions?.[0]?.versionName}
                   </p>
                 </li>
                 <hr className="mt-3" />
