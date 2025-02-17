@@ -8,7 +8,7 @@ export default async function Home({ params }: { params: any }) {
   const { locale } = await params;
   const windows = await get_application({
     perPage: 10,
-    category: "windows",
+    category: "Windows",
     topDownloads: true,
   });
   const MacOs = await get_application({

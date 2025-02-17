@@ -27,11 +27,11 @@ export default async function page({ params }: { params: any }) {
               </li>
               <li>{">"}</li>
               <li>
-                <Link href={"/"}>{program.category.name}</Link>
+                <Link href={"/"}>{program?.category?.name}</Link>
               </li>
               <li>{">"}</li>
               <li>
-                <Link href={"/"}>{program.subCategory[0].name}</Link>
+                <Link href={"/"}>{program.subCategory?.[0]?.name}</Link>
               </li>
             </ul>
           </div>
@@ -43,7 +43,7 @@ export default async function page({ params }: { params: any }) {
           <div className="rounded-lg border border-black/10 bg-white px-4 py-5">
             <h1 className="text-3xl">{program?.title}</h1>
             <p className="mt-3 opacity-65">{program?.subtitle}</p>
-            <Slider_Images images={program.images} />
+            <Slider_Images images={program?.images} />
 
             <div
               dangerouslySetInnerHTML={{ __html: program.description }}

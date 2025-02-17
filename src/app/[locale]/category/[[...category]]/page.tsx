@@ -12,7 +12,6 @@ export default async function page({
   searchParams: any;
 }) {
   const { category, locale } = await params;
-  console.log("test ", category);
   const applications = await get_application({
     category: category[0],
     topDownloads: false,
@@ -41,7 +40,7 @@ export default async function page({
               </li>
               <li>{">"}</li>
               <Link
-                href={`/${locale}/${category[0]}/${decodeURI(category[1])}`}
+                href={`/${locale}/category/${category[0]}/${decodeURI(category[1])}`}
               >
                 {decodeURI(category[1])}
               </Link>
