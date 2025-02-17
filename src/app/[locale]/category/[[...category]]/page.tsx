@@ -20,7 +20,6 @@ export default async function page({
   });
 
   const categoris = await get_Categories();
-  // console.log(categoris);
 
   return (
     <main>
@@ -126,7 +125,10 @@ export default async function page({
             </Link>
             <Link
               href={`/${locale}/category/${category[0]}/${category[1]}/${+(category[2] || 1) + 1}`}
-              className="bg-black px-5 py-2 text-white"
+              className={clsx("bg-black px-5 py-2 text-white", {
+                "pointer-events-none bg-black/50 opacity-50":
+                  applications?.length == 0,
+              })}
             >
               Next
             </Link>

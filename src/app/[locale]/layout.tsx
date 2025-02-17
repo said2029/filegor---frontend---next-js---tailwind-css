@@ -33,7 +33,7 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <html lang={locale}>
-      <body className={`${rubik.className} antialiased`}>
+      <body className={`${rubik.className} antialiased relative`}>
         <NextIntlClientProvider messages={messages}>
           <Header />
           {children}

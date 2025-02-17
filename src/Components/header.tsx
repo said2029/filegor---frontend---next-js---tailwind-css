@@ -1,31 +1,56 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import useCategory from "@/hooks/useCategory";
+import { Loader, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState, useTransition } from "react";
 import { HiMenuAlt3, HiOutlineViewGridAdd } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
 import { SiOpensearch } from "react-icons/si";
+import { AnimatePresence, motion } from "motion/react";
 
 export default function Header() {
   const t = useTranslations("header");
   const { category } = useCategory(7);
   const locale = useLocale();
+  const router = useRouter();
+  const [isSearchPinding, StartSearchPinding] = useTransition();
+  const [ShowNavMobile, setShowNavMobile] = useState(false);
   return (
-    <header className="w-screen bg-white px-4 md:px-0">
+    <header className="w-screen overflow-hidden bg-white md:px-0">
       {/* top */}
-      <div className="container flex items-center justify-between py-4">
-        <div className="flex items-center gap-3">
-          <div className="grid size-11 place-content-center rounded-md bg-primary text-white">
+      <div className="container z-[70] flex items-center justify-between bg-white px-4 py-4">
+        <div className="flex w-[100px] items-center gap-3 overflow-hidden">
+          <Link
+            href={"/"}
+            className="grid aspect-square size-11 place-content-center rounded-md bg-primary text-white"
+          >
             <SiOpensearch size={30} />
-          </div>
+          </Link>
+          {/* search */}
           <div className="flex items-center">
             <div className="grid size-11 place-content-center rounded-s-md bg-primary text-white">
-              <IoIosSearch size={30} />
+              {!isSearchPinding ? (
+                <IoIosSearch size={30} />
+              ) : (
+                <div>
+                  <Loader className="animate-spin" />
+                </div>
+              )}
             </div>
             <input
+              onKeyUp={(event) => {
+                if (event.key === "Enter") {
+                  console.log(event);
+                  const q = event.currentTarget.value;
+                  StartSearchPinding(() => {
+                    router.push(`/${locale}/search?q=${q}`);
+                  });
+                }
+              }}
               className="h-11 rounded-e-md border border-black/5 bg-gray-400/15 ps-3 focus:outline-none md:w-96"
               placeholder={t("inputSearch")}
               type="search"
@@ -33,13 +58,14 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="hidden items-center gap-2 opacity-80 md:flex">
-          <HiOutlineViewGridAdd size={30} />
-          <h3 className="text-lg">Category</h3>
-        </div>
         {/* mobile Button */}
-        <button className="grid size-11 place-content-center rounded-md bg-primary text-white md:hidden">
-          <HiMenuAlt3 />
+        <button
+          onClick={() => {
+            setShowNavMobile((pre) => !pre);
+          }}
+          className="grid aspect-square size-11 place-content-center rounded-md bg-primary text-white md:hidden"
+        >
+          {ShowNavMobile ? <X size={20} /> : <HiMenuAlt3 />}
         </button>
       </div>
       <hr className="h-[0.5px] border-black/25" />
@@ -64,6 +90,43 @@ export default function Header() {
         ))}
       </div>
       <hr className="h-[0.5px] border-black/25" />
+
+      <AnimatePresence>
+        {ShowNavMobile && (
+          <motion.div
+            variants={{
+              init: { y: "-140%" },
+              show: { y: "0dvh" },
+            }}
+            initial="init"
+            animate="show"
+            exit={"init"}
+            transition={{ duration: 0.4 }}
+            className="absolute inset-0 left-0 top-14 z-[60] min-h-[100vh] w-full bg-white py-11"
+          >
+            {category.map((cat: any) => (
+              <Link
+                onClick={() => {
+                  setShowNavMobile(false);
+                }}
+                className="flex items-center gap-5 px-3 py-3 transition-all hover:bg-primary hover:text-white"
+                key={cat.id}
+                href={`/${locale}/category/${cat.slug}`}
+              >
+                <div className="size-8">
+                  <Image
+                    width={32}
+                    height={32}
+                    alt={cat?.name}
+                    src={cat?.image}
+                  />
+                </div>
+                <h3 className="text-md font-medium">{cat?.name}</h3>
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

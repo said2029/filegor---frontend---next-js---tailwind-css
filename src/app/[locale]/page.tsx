@@ -88,7 +88,7 @@ export default async function Home({ params }: { params: any }) {
           </div>
         </div>
 
-        <div className="sticky top-10 mt-10 h-fit bg-white p-5 lg:w-[470px]">
+        <aside className="sticky top-10 mt-10 h-fit bg-white p-5 lg:w-[470px]">
           <h2 className="text-2xl">Pc Games</h2>
           <hr />
           <div>
@@ -126,7 +126,7 @@ export default async function Home({ params }: { params: any }) {
               </Link>
             ))}
           </div>
-        </div>
+        </aside>
       </section>
     </main>
   );
