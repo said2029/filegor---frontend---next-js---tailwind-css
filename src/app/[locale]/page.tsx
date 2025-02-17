@@ -3,14 +3,12 @@ import Main_Card from "@/Components/Cards/Main_Card";
 import { get_application } from "@/utils/actions";
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineCloudDownload } from "react-icons/ai";
-import { FaStar } from "react-icons/fa";
 
 export default async function Home({ params }: { params: any }) {
   const { locale } = await params;
   const windows = await get_application({
     perPage: 10,
-    category: "Windows",
+    category: "windows",
     topDownloads: true,
   });
   const MacOs = await get_application({

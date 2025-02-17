@@ -49,7 +49,7 @@ export default function Header() {
           <Link
             key={item?.id}
             className="flex h-full flex-grow items-center justify-center gap-2 border-e-[0.5px] border-s-[0.5px] border-black/10 opacity-85 transition-all hover:bg-primary hover:text-white"
-            href={`/${locale}/${item.name}`}
+            href={`/${locale}/category/${item.slug}`}
           >
             <div className="size-8">
               <Image

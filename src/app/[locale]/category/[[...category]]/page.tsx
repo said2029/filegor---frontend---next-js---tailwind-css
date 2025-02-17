@@ -7,28 +7,27 @@ import React from "react";
 
 export default async function page({
   params,
-  searchParams,
 }: {
   params: any;
   searchParams: any;
 }) {
   const { category, locale } = await params;
-  const { sub, page = 1 } = await searchParams;
+  console.log("test ", category);
   const applications = await get_application({
-    category: category,
+    category: category[0],
     topDownloads: false,
-    subCategory: sub,
-    page: page ?? 1,
+    ...(category[1] != "undefined" && { subCategory: category[1] }),
+    page: category[2] ?? 1,
   });
 
   const categoris = await get_Categories();
-  console.log(categoris);
+  // console.log(categoris);
 
   return (
     <main>
       <div className="w-screen bg-gradient-to-r from-blue-500 to-teal-500 py-5">
         <div className="container flex flex-col items-center justify-between gap-2 text-center md:flex-row md:text-start">
-          <h1 className="text-2xl text-white">{decodeURI(category)}</h1>
+          <h1 className="text-2xl text-white">{decodeURI(category[0])}</h1>
           <div>
             <ul className="flex space-x-2 text-white">
               <li>
@@ -36,12 +35,16 @@ export default async function page({
               </li>
               <li>{">"}</li>
               <li>
-                <Link href={`/${decodeURI(category)}`}>
-                  {decodeURI(category)}
+                <Link href={`/${locale}/category/${decodeURI(category[0])}`}>
+                  {decodeURI(category[0])}
                 </Link>
               </li>
               <li>{">"}</li>
-              <Link href={`/${decodeURI(sub)}`}>{decodeURI(sub)}</Link>
+              <Link
+                href={`/${locale}/${category[0]}/${decodeURI(category[1])}`}
+              >
+                {decodeURI(category[1])}
+              </Link>
             </ul>
           </div>
         </div>
@@ -57,12 +60,12 @@ export default async function page({
             <div className="space-y-7">
               {categoris?.map((cat: any) => (
                 <Link
-                  href={`/${locale}/${cat.name}`}
+                  href={`/${locale}/category/${cat.slug}`}
                   key={cat.id}
                   className="flex cursor-pointer items-center gap-4"
                 >
                   <input
-                    defaultChecked={cat.name.includes(decodeURI(category))}
+                    defaultChecked={cat.slug == category[0]}
                     className="size-5 appearance-none rounded-md bg-gray-300/75 checked:bg-teal-400"
                     type="checkbox"
                   />
@@ -78,15 +81,15 @@ export default async function page({
             <hr className="my-5" />
             <div className="space-y-7">
               {categoris
-                ?.find((item:any) => item.name == decodeURI(category))
+                ?.find((item: any) => item.slug == category[0])
                 ?.subcategory?.map((subCat: any) => (
                   <Link
-                    href={`/${locale}/${category}?sub=${subCat.name}`}
+                    href={`/${locale}/category/${category[0]}/${subCat.slug}`}
                     key={subCat.id}
                     className="flex cursor-pointer items-center gap-4"
                   >
                     <input
-                      defaultChecked={subCat.name.includes(decodeURI(sub))}
+                      defaultChecked={subCat.slug == category[1]}
                       className="size-5 appearance-none rounded-md bg-gray-300/75 checked:bg-teal-400"
                       type="checkbox"
                     />
@@ -98,7 +101,7 @@ export default async function page({
         </aside>
         <main className="w-screen px-4 md:px-0 lg:col-span-2 lg:w-full">
           <div className="flex w-full items-center justify-between border-s-[6px] border-primary bg-white px-5 py-4">
-            <h3 className="text-xl font-medium">{decodeURI(category)}</h3>
+            <h3 className="text-xl font-medium">{decodeURI(category[0])}</h3>
             {/* <Link href={"/"} className="rounded-sm border px-2 py-1 opacity-80">
               View All
             </Link> */}
@@ -115,15 +118,15 @@ export default async function page({
 
           <div className="mt-10 flex w-full items-center justify-between">
             <Link
-              href={`/${locale}/${category}?sub=${sub}&page=${+page > 1 ? +page - 1 : 1}`}
+              href={`/${locale}/category/${category[0]}/${category[1]}/${+category[2] > 1 ? +category[2] - 1 : 1}`}
               className={clsx("bg-black px-5 py-2 text-white", {
-                "pointer-events-none bg-black/50 opacity-50": page <= 1,
+                "pointer-events-none bg-black/50 opacity-50": category[2] <= 1,
               })}
             >
               Previews
             </Link>
             <Link
-              href={`/${locale}/${category}?sub=${sub}&page=${+page + 1}`}
+              href={`/${locale}/category/${category[0]}/${category[1]}/${+(category[2] || 1) + 1}`}
               className="bg-black px-5 py-2 text-white"
             >
               Next
