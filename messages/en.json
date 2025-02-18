@@ -1,9 +1,16 @@
 {
+  "dir": "ltr",
   "header": {
     "inputSearch": "Search Product..."
   },
   "HomePage": {
     "sea": "",
     "about": "Go to the about page"
+  },
+  "download-page": {
+    "thanks": "Thanks for Downloading",
+    "password": "The password for Zip file is: 123",
+    "generate": "Generate Download Link",
+    "download": "Click to Download"
   }
 }

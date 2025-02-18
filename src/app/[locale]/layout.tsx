@@ -15,7 +15,9 @@ const rubik = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: process.env.NEXT_PUBLIC_BASE_URL ? new URL(process.env.NEXT_PUBLIC_BASE_URL) : undefined,
+  metadataBase: process.env.NEXT_PUBLIC_BASE_URL
+    ? new URL(process.env.NEXT_PUBLIC_BASE_URL)
+    : undefined,
   title: {
     default: config.name,
     template: "%s | " + config.name,
@@ -45,14 +47,14 @@ export default async function RootLayout({
   }
   const messages = await getMessages();
   return (
-    <html lang={locale}>
-      <body className={`${rubik.className} relative antialiased`}>
-        <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider messages={messages}>
+      <html lang={locale}>
+        <body className={`${rubik.className} relative antialiased`}>
           <Header />
           {children}
           <Footer locale={locale} />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </NextIntlClientProvider>
   );
 }

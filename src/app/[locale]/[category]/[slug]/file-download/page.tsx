@@ -5,6 +5,7 @@ import { get_application, get_by_slug } from "@/utils/actions";
 import { Link } from "lucide-react";
 import Main_Card from "@/Components/Cards/Main_Card";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 export default async function Page({
   params,
@@ -13,6 +14,7 @@ export default async function Page({
   params: { slug: string; locale: string; category: string };
   searchParams: { u: string };
 }) {
+  const t = await getTranslations("download-page");
   const { slug, locale, category } = await params;
   const { u } = await searchParams;
   if (!u) return redirect(`/${locale}/${category}/${slug}`);
@@ -30,7 +32,7 @@ export default async function Page({
             <FiDownloadCloud strokeWidth={1} size={100} />
           </div>
           <div>
-            <h2 className="text-xl font-semibold">Thanks for Downloading</h2>
+            <h2 className="text-xl font-semibold">{t("thanks")}</h2>
             <p className="text-teal-600">{program?.title}</p>
           </div>
         </div>
@@ -40,9 +42,7 @@ export default async function Page({
         </div>
 
         <div>
-          <p className="mt-6 font-semibold text-red-500">
-            The password for Zip file is: 123
-          </p>
+          <p className="mt-6 font-semibold text-red-500">{t("password")}</p>
         </div>
       </div>
       <hr className="my-16" />

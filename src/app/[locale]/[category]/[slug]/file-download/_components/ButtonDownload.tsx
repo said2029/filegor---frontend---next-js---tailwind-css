@@ -5,9 +5,11 @@ import { Loader2 } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { GoDownload } from "react-icons/go";
+import { useTranslations } from "next-intl";
 
 export default function ButtonDownload({ link }: { link: string }) {
   const [CanDownload, setCanDownload] = useState(false);
+  const t =useTranslations("download-page");
   return (
     <Link
       target="_blank"
@@ -37,11 +39,11 @@ export default function ButtonDownload({ link }: { link: string }) {
       >
         <li className="flex items-center gap-3">
           <Loader2 className="animate-spin" />
-          <p>Generate Download Link</p>
+          <p>{t("generate")}</p>
         </li>
         <li className="flex items-center gap-3">
           <GoDownload size={20} />
-          <p>Click to Download</p>{" "}
+          <p>{t("download")}</p>{" "}
         </li>
       </motion.ul>
     </Link>
