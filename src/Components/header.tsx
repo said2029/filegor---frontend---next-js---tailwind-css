@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useTransition } from "react";
-import { HiMenuAlt3, HiOutlineViewGridAdd } from "react-icons/hi";
+import { HiMenuAlt3 } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
 import { SiOpensearch } from "react-icons/si";
 import { AnimatePresence, motion } from "motion/react";
