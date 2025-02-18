@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { FiDownloadCloud } from "react-icons/fi";
 import ButtonDownload from "./_components/ButtonDownload";
@@ -11,12 +12,12 @@ export default async function Page({
   params,
   searchParams,
 }: {
-  params: { slug: string; locale: string; category: string };
-  searchParams: { u: string };
+  params: any;
+  searchParams: any;
 }) {
   const t = await getTranslations("download-page");
-  const { slug, locale, category } = await params;
-  const { u } = await searchParams;
+  const { slug, locale, category } = params;
+  const { u } = searchParams;
   if (!u) return redirect(`/${locale}/${category}/${slug}`);
   const program = await get_by_slug(slug);
   const related = await get_application({

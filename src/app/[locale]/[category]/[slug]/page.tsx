@@ -14,19 +14,25 @@ const Application = cache(async (slug: string) => {
 });
 
 export async function generateStaticParams() {
-  const applocatins = await get_application({
-    perPage: 100,
+  const applications = await get_application({
     topDownloads: false,
+    perPage: 100,
   });
-
-  return applocatins?.map((item) => ({ slug: item.slug }));
+  return (
+    applications?.map((app: any) => ({
+      slug: app.slug,
+      category: app.category.slug,
+      locale: "en",
+    })) ?? []
+  );
 }
 
 export async function generateMetadata({
-  params: { slug, category },
+  params,
 }: {
-  params: { slug: string; category: string };
+  params: any;
 }): Promise<Metadata> {
+  const { slug, category } = await params;
   const program = await Application(slug);
 
   return {
@@ -61,7 +67,7 @@ export async function generateMetadata({
 }
 
 export default async function page({ params }: { params: any }) {
-  const { slug, category, locale } = await params;
+  const { slug, category, locale } = params;
   const program = await Application(slug);
   const related = await get_application({
     topDownloads: true,

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { get_application } from "@/utils/actions";
 import type { MetadataRoute } from "next";
-
+export const revalidate = 86400;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const applicatons: any = await get_application({
     perPage: 50000,

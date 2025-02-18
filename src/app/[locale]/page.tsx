@@ -94,7 +94,7 @@ export default async function Home({ params }: { params: any }) {
           <div>
             {pc_games?.map((item, index) => (
               <Link
-                href={`/${locale}/${item.category.name}/${item.slug}`}
+                href={`/${locale}/${item.category.slug}/${item.slug}`}
                 key={index}
                 className="mt-7 flex gap-2"
               >

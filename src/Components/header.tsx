@@ -11,7 +11,7 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
 import { AnimatePresence, motion } from "motion/react";
 import { config } from "@/utils/contents";
-
+export const dynamic = "force-static";
 export default function Header() {
   const t = useTranslations("header");
   const { category } = useCategory(7);
@@ -90,6 +90,7 @@ export default function Header() {
           </Link>
         ))}
       </div>
+
       <hr className="h-[0.5px] border-black/25" />
 
       <AnimatePresence>

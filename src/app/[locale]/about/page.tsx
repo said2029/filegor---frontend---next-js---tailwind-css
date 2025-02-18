@@ -1,6 +1,6 @@
 import { config } from "@/utils/contents";
 import React from "react";
-
+export const dynamic = "force-static";
 export default function page() {
   return (
     <main className="mt-10">
