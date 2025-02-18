@@ -67,7 +67,7 @@ export async function generateMetadata({
 }
 
 export default async function page({ params }: { params: any }) {
-  const { slug, category, locale } = params;
+  const { slug, category, locale } =await params;
   const program = await Application(slug);
   const related = await get_application({
     topDownloads: true,
