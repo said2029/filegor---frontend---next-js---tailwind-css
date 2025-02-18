@@ -23,9 +23,10 @@ export default function Header() {
     <header className="w-screen overflow-hidden bg-white md:px-0">
       {/* top */}
       <div className="container z-[70] flex items-center justify-between bg-white px-4 py-4">
-        <div className="flex w-[100px] items-center gap-3 overflow-hidden">
+        <div className="flex w-fit items-center gap-3 overflow-hidden">
           <Link
             href={"/"}
+            title="Logo"
             className="grid aspect-square size-11 place-content-center rounded-md bg-primary text-white"
           >
             <SiOpensearch size={30} />
@@ -81,7 +82,7 @@ export default function Header() {
               <Image
                 width={32}
                 height={32}
-                alt={item?.name}
+                alt={item?.slug}
                 src={item?.image}
               />
             </div>

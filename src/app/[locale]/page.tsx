@@ -8,12 +8,12 @@ export default async function Home({ params }: { params: any }) {
   const { locale } = await params;
   const windows = await get_application({
     perPage: 10,
-    category: "Windows",
+    category: "windows",
     topDownloads: true,
   });
   const MacOs = await get_application({
     perPage: 10,
-    category: "MacOs",
+    category: "macos",
     topDownloads: true,
   });
   const Android = await get_application({
@@ -23,20 +23,20 @@ export default async function Home({ params }: { params: any }) {
   });
   const pc_games = await get_application({
     perPage: 10,
-    category: "PC Games",
+    category: "pc-games",
     topDownloads: true,
   });
 
   return (
-    <main className="px-4 md:px-0">
+    <main className="w-screen overflow-hidden px-4 md:px-0">
       <section className="container flex flex-col gap-7 lg:flex-row">
         <div className="mt-10 w-full space-y-10">
           {/* Windows */}
           <div>
             <div className="flex w-full items-center justify-between border-s-[10px] border-primary bg-white px-5 py-5">
-              <h3 className="text-xl font-medium">Windows</h3>
+              <h2 className="text-xl font-medium">Windows</h2>
               <Link
-                href={"/"}
+                href={`/${locale}/category/windows`}
                 className="rounded-sm border px-2 py-1 opacity-80"
               >
                 View All
@@ -53,9 +53,9 @@ export default async function Home({ params }: { params: any }) {
           {/* MacOs */}
           <div>
             <div className="flex w-full items-center justify-between border-s-[10px] border-primary bg-white px-5 py-5">
-              <h3 className="text-xl font-medium">MacOs</h3>
+              <h2 className="text-xl font-medium">MacOs</h2>
               <Link
-                href={"/"}
+                href={`/${locale}/category/macos`}
                 className="rounded-sm border px-2 py-1 opacity-80"
               >
                 View All
@@ -71,9 +71,9 @@ export default async function Home({ params }: { params: any }) {
           {/* Android */}
           <div>
             <div className="flex w-full items-center justify-between border-s-[10px] border-primary bg-white px-5 py-5">
-              <h3 className="text-xl font-medium">Android</h3>
+              <h2 className="text-xl font-medium">Android</h2>
               <Link
-                href={"/"}
+                 href={`/${locale}/category/android`}
                 className="rounded-sm border px-2 py-1 opacity-80"
               >
                 View All

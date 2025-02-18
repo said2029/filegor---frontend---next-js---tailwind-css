@@ -54,7 +54,7 @@ export default async function page({ params }: { params: any }) {
             <h2 className="text-xl">Previous version</h2>
             <hr className="mt-2 w-full" />
             <div className="max-w-[100dvw] overflow-x-auto">
-              <table className="mt-4 w-full min-w-[700px] space-y-5">
+              <table id="versions" className="mt-4 w-full min-w-[700px] space-y-5">
                 <thead className="block bg-gray-100 py-3">
                   <tr className="flex items-center justify-between font-normal">
                     <th className="w-28">Date</th>
@@ -101,7 +101,7 @@ export default async function page({ params }: { params: any }) {
                             <Link
                               key={link + index}
                               className="grid size-9 place-content-center rounded-lg bg-teal-600 text-white"
-                              href={"/"}
+                              href={`/${locale}/${program?.category?.name}/${slug}/file-download/?u=${link}`}
                             >
                               <FaDownload />
                             </Link>
@@ -110,7 +110,7 @@ export default async function page({ params }: { params: any }) {
                             <Link
                               key={link + index}
                               className="grid size-9 place-content-center rounded-lg bg-teal-600 text-white"
-                              href={"/"}
+                              href={`/${locale}/${program?.category?.name}/${slug}/file-download/?u=${link}`}
                             >
                               <SiUtorrent />
                             </Link>
@@ -138,7 +138,7 @@ export default async function page({ params }: { params: any }) {
                   <Link
                     key={index}
                     className="block w-full rounded-md bg-zinc-800 py-3 text-sm font-semibold text-white"
-                    href={"/"}
+                    href={`/${locale}/${program?.category?.name}/${slug}/file-download/?u=${link}`}
                   >
                     Direct Download
                   </Link>
@@ -149,7 +149,7 @@ export default async function page({ params }: { params: any }) {
                   <Link
                     key={index}
                     className="block w-full rounded-md bg-[#74b23e] py-3 text-sm font-semibold text-white"
-                    href={"/"}
+                    href={`/${locale}/${program?.category?.name}/${slug}/file-download/?u=${link}`}
                   >
                     Torrent Download
                   </Link>
@@ -159,7 +159,7 @@ export default async function page({ params }: { params: any }) {
 
             <div className="mt-7 grid place-content-center text-teal-600">
               <a
-                href={"/"}
+                href={"#versions"}
                 className="flex items-center gap-1 text-sm font-medium"
               >
                 <CiClock2 size={20} />

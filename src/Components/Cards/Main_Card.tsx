@@ -51,7 +51,7 @@ export default function Main_Card({
                 src={item?.category?.image}
               />
             </span>
-            <h3 className="text-xs text-teal-600">{item?.category?.name}</h3>
+            <h3 className="text-xs text-teal-800">{item?.category?.name}</h3>
           </div>
           <div className="flex items-center gap-2">
             <span className="block size-4">
