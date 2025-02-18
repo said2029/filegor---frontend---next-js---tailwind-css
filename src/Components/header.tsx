@@ -9,8 +9,8 @@ import { useRouter } from "next/navigation";
 import React, { useState, useTransition } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoIosSearch } from "react-icons/io";
-import { SiOpensearch } from "react-icons/si";
 import { AnimatePresence, motion } from "motion/react";
+import { config } from "@/utils/contents";
 
 export default function Header() {
   const t = useTranslations("header");
@@ -29,7 +29,7 @@ export default function Header() {
             title="Logo"
             className="grid aspect-square size-11 place-content-center rounded-md bg-primary text-white"
           >
-            <SiOpensearch size={30} />
+            <Image width={30} height={30} alt="logo" src={config.iconPath} />
           </Link>
           {/* search */}
           <div className="flex items-center">
@@ -103,7 +103,7 @@ export default function Header() {
             animate="show"
             exit={"init"}
             transition={{ duration: 0.4 }}
-            className="absolute inset-0 left-0 top-16 z-[60] min-h-[100vh] w-full bg-white py-11"
+            className="top-17 absolute inset-0 left-0 z-[60] min-h-[100vh] w-full bg-white py-11"
           >
             {category.map((cat: any) => (
               <Link

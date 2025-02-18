@@ -1,16 +1,68 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Slider_Images from "@/Components/slider_Images";
 import { get_application, get_by_slug } from "@/utils/actions";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { cache } from "react";
 import { CiClock2 } from "react-icons/ci";
 import { FaDownload } from "react-icons/fa";
 import { SiUtorrent } from "react-icons/si";
 
+const Application = cache(async (slug: string) => {
+  return await get_by_slug(slug);
+});
+
+export async function generateStaticParams() {
+  const applocatins = await get_application({
+    perPage: 100,
+    topDownloads: false,
+  });
+
+  return applocatins?.map((item) => ({ slug: item.slug }));
+}
+
+export async function generateMetadata({
+  params: { slug, category },
+}: {
+  params: { slug: string; category: string };
+}): Promise<Metadata> {
+  const program = await Application(slug);
+
+  return {
+    title: program?.title,
+    description: program?.subtitle + " " + program?.title,
+    // keywords: data?.tags,
+    openGraph: {
+      title: program?.title,
+      description: program?.subtitle + " " + program?.title,
+      url: process.env.NEXT_PUBLIC_BASE_URL + `/en/${category}/${slug}`,
+      images: [
+        {
+          url: program?.images?.[1],
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+    twitter: {
+      title: program?.title,
+      images: [
+        {
+          url: program?.images?.[1],
+          width: 500,
+          height: 500,
+        },
+      ],
+    },
+    robots:
+      "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  };
+}
+
 export default async function page({ params }: { params: any }) {
   const { slug, category, locale } = await params;
-  const program = await get_by_slug(slug);
+  const program = await Application(slug);
   const related = await get_application({
     topDownloads: true,
     category: category,
@@ -54,12 +106,15 @@ export default async function page({ params }: { params: any }) {
             <h2 className="text-xl">Previous version</h2>
             <hr className="mt-2 w-full" />
             <div className="max-w-[100dvw] overflow-x-auto">
-              <table id="versions" className="mt-4 w-full min-w-[700px] space-y-5">
+              <table
+                id="versions"
+                className="mt-4 w-full min-w-[700px] space-y-5"
+              >
                 <thead className="block bg-gray-100 py-3">
                   <tr className="flex items-center justify-between font-normal">
                     <th className="w-28">Date</th>
                     <th>Additional info</th>
-                    <th>downloads</th>
+                    <th>Downloads</th>
                   </tr>
                 </thead>
                 <tbody className="mt-7 block space-y-4">
