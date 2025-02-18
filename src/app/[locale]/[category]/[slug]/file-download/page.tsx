@@ -13,13 +13,13 @@ export default async function Page({
   params: { slug: string; locale: string; category: string };
   searchParams: { u: string };
 }) {
-  const { slug, locale,category } = await params;
-  const { u } = searchParams;
+  const { slug, locale, category } = await params;
+  const { u } = await searchParams;
   if (!u) return redirect(`/${locale}/${category}/${slug}`);
   const program = await get_by_slug(slug);
   const related = await get_application({
     topDownloads: true,
-    category: program.category.name,
+    category: program.category.slug,
   });
 
   return (

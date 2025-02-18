@@ -103,7 +103,7 @@ export default function Header() {
             animate="show"
             exit={"init"}
             transition={{ duration: 0.4 }}
-            className="absolute inset-0 left-0 top-14 z-[60] min-h-[100vh] w-full bg-white py-11"
+            className="absolute inset-0 left-0 top-16 z-[60] min-h-[100vh] w-full bg-white py-11"
           >
             {category.map((cat: any) => (
               <Link
