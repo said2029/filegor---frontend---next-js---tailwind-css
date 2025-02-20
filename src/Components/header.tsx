@@ -27,13 +27,13 @@ export default function Header() {
           <Link
             href={"/"}
             title="Logo"
-            className="grid aspect-square size-11 place-content-center rounded-md bg-primary text-white"
+            className="grid aspect-square size-10 place-content-center rounded-md bg-primary text-white"
           >
             <Image width={30} height={30} alt="logo" src={config.iconPath} />
           </Link>
           {/* search */}
           <div className="flex items-center">
-            <div className="grid size-11 place-content-center rounded-s-md bg-primary text-white">
+            <div className="grid size-10 place-content-center rounded-s-md bg-primary text-white">
               {!isSearchPinding ? (
                 <IoIosSearch size={30} />
               ) : (
@@ -52,7 +52,7 @@ export default function Header() {
                   });
                 }
               }}
-              className="h-11 rounded-e-md border border-black/5 bg-gray-400/15 ps-3 focus:outline-none md:w-96"
+              className="h-10 rounded-e-md border border-black/5 bg-gray-400/10 ps-3 text-sm placeholder:text-black/70 focus:outline-none md:w-96"
               placeholder={t("inputSearch")}
               type="search"
             />
@@ -69,29 +69,29 @@ export default function Header() {
           {ShowNavMobile ? <X size={20} /> : <HiMenuAlt3 />}
         </button>
       </div>
-      <hr className="h-[0.5px] border-black/25" />
+      <hr className="h-[0.5px] border-black/10" />
 
-      <div className="container hidden h-20 items-center justify-between md:flex">
+      <div className="container hidden items-center justify-between md:flex">
         {category.map((item: any) => (
           <Link
             key={item?.id}
-            className="flex h-full flex-grow items-center justify-center gap-2 border-e-[0.5px] border-s-[0.5px] border-black/10 opacity-85 transition-all hover:bg-primary hover:text-white"
+            className="category-header-item flex h-full flex-grow items-center justify-center gap-2 border-x-[0.2px] border-black/15 py-4 opacity-80 transition-all hover:bg-primary hover:text-white"
             href={`/${locale}/category/${item.slug}`}
           >
             <div className="size-8">
               <Image
-                width={32}
-                height={32}
+                width={22}
+                height={22}
                 alt={item?.slug}
                 src={item?.image}
               />
             </div>
-            <h3 className="text-md font-medium">{item?.name}</h3>
+            <h3 className="text-sm font-medium">{item?.name}</h3>
           </Link>
         ))}
       </div>
 
-      <hr className="h-[0.5px] border-black/25" />
+      <hr className="h-[0.5px] border-black/10" />
 
       <AnimatePresence>
         {ShowNavMobile && (
@@ -104,8 +104,16 @@ export default function Header() {
             animate="show"
             exit={"init"}
             transition={{ duration: 0.4 }}
-            className="top-17 absolute inset-0 left-0 z-[60] min-h-[100vh] w-full bg-white py-11"
+            className="absolute inset-0 left-0 z-[60] min-h-[100vh] w-full bg-white py-11"
           >
+            <button
+              onClick={() => {
+                setShowNavMobile(false);
+              }}
+              className="absolute end-9 top-4"
+            >
+              <X />
+            </button>
             {category.map((cat: any) => (
               <Link
                 onClick={() => {

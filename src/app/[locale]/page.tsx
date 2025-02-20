@@ -73,7 +73,7 @@ export default async function Home({ params }: { params: any }) {
             <div className="flex w-full items-center justify-between border-s-[10px] border-primary bg-white px-5 py-5">
               <h2 className="text-xl font-medium">Android</h2>
               <Link
-                 href={`/${locale}/category/android`}
+                href={`/${locale}/category/android`}
                 className="rounded-sm border px-2 py-1 opacity-80"
               >
                 View All
@@ -89,8 +89,8 @@ export default async function Home({ params }: { params: any }) {
         </div>
 
         <aside className="sticky top-10 mt-10 h-fit bg-white p-5 lg:w-[470px]">
-          <h2 className="text-2xl">Pc Games</h2>
-          <hr />
+          <h2 className="text-xl font-medium">PC Games</h2>
+          <hr className="my-3"/>
           <div>
             {pc_games?.map((item, index) => (
               <Link
