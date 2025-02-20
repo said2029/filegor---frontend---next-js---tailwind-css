@@ -24,7 +24,7 @@ export default function Main_Card({
             width={74}
             height={74}
             alt={item?.title}
-            src={item?.images[0]}
+            src={item?.icon}
           />
         </div>
         <div className="space-y-1">

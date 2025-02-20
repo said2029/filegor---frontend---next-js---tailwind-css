@@ -8,7 +8,7 @@ export default function Slider_Images({ images }: { images: string[] }) {
         align:"center"
     }} className="w-full overflow-hidden my-5">
       <CarouselContent className="h-[370px]">
-        {images.slice(1, images.length).map((image: string, index: number) => (
+        {images.map((image: string, index: number) => (
           <CarouselItem
             key={index}
             className="pointer-events-none select-none overflow-hidden"
