@@ -32,15 +32,11 @@ export default function Main_Card({
             {item?.title}
           </h3>
           <p className="line-clamp-1 text-xs opacity-75">{item?.subtitle}</p>
-          <p
-            className="text-sm text-primary"
-          >
-            {item?.category.name}
-          </p>
+          <p className="text-sm text-primary">{item?.category.name}</p>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-5 lg:flex-nowrap h-full">
+      <div className="flex h-full flex-wrap items-center justify-between gap-5 lg:flex-nowrap">
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center gap-1">
             <span className="block size-4">
@@ -62,14 +58,21 @@ export default function Main_Card({
         </div>
 
         <hr className="h-full border border-black" />
-        {item?.rate != 0 && (
+        {item?.rate.average != 0 && (
           <>
             <div className="space-y-2 text-center">
               <h3>Reputation</h3>
               <div className="flex items-center gap-1">
-                {Array.from({ length: item.rate }).map((item, index) => (
-                  <FaStar className="text-yellow-500" key={index} />
-                ))}
+                {Array.from({ length: item.rate.average }).map(
+                  (item, index) => (
+                    <FaStar size={13} className="text-yellow-500" key={index} />
+                  ),
+                )}
+                {Array.from({ length: 5 - Math.floor(item.rate.average) }).map(
+                  (item, index) => (
+                    <FaStar size={13} className="text-gray-500" key={index} />
+                  ),
+                )}
               </div>
             </div>
             <hr className="h-full border-2 border-black" />

@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     ? new URL(process.env.NEXT_PUBLIC_BASE_URL)
     : undefined,
   title: {
-    default: config.name,
-    template: "%s | " + config.name,
+    default: config.websiteName,
+    template: "%s | " + config.websiteName,
   },
   description: config.description,
   keywords: config.keywords,

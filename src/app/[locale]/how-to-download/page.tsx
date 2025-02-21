@@ -8,12 +8,12 @@ export default function page() {
       <div className="container mt-10 flex w-full flex-col items-center justify-center rounded-lg border border-black/15 bg-white p-5 px-9 text-start">
         <article className="prose lg:prose-xl">
           <p className="mb-4">
-            Follow the steps below to download your favorite files from {config.name}.
+            Follow the steps below to download your favorite files from {config.websiteName}.
           </p>
           <h2 className="mt-8 mb-4 text-2xl font-bold">
             <strong>Search a Software</strong>
           </h2>
-          <p className="mb-4">Navigate to the {config.name} website.</p>
+          <p className="mb-4">Navigate to the {config.websiteName} website.</p>
           <p className="mb-4">
             Use the search bar located in the navigation bar at the top of the
             page to search for a specific software by name.
@@ -38,7 +38,7 @@ export default function page() {
           </p>
           <p className="mb-4">
             Users can find the search bar in the navigation bar on the top of
-            {config.name}.
+            {config.websiteName}.
           </p>
           <p className="mb-4">
             You can also filter software by categories to find your favorite
@@ -52,11 +52,11 @@ export default function page() {
             listing to view more information and download options.
           </p>
           <p className="mb-4">
-            {config.name} offers both <strong>direct download</strong> and{" "}
+            {config.websiteName} offers both <strong>direct download</strong> and{" "}
             <strong>torrent download</strong> options. To download the software
             using direct download, click the “Direct Download” button. The
             download will begin immediately and the file will be downloaded
-            directly from the {config.name} servers.
+            directly from the {config.websiteName} servers.
           </p>
           <p className="mb-4">
             To download the software using torrent download, you will need a

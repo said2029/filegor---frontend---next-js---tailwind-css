@@ -76,7 +76,7 @@ export default async function Footer({ locale = "en" }: { locale: string }) {
       <div className="mt-10 bg-zinc-950/50 py-3">
         <div className="container flex flex-wrap items-center justify-center gap-3 md:justify-between">
           <p className="text-sm">
-            ©{config.name} -{" "}
+            ©{config.websiteName} -{" "}
             <span className="opacity-75">
               All Rights Reserved {date.getFullYear()}
             </span>

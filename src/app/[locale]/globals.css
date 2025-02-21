@@ -94,3 +94,75 @@ body {
 ::-webkit-scrollbar-thumb {
   @apply bg-primary;
 }
+
+.article,article {
+  padding: 0 4px
+}
+
+@media only screen and (min-width: 768px) {
+  .article,article {
+      padding:0 16px
+  }
+}
+
+.article p,article p {
+  @apply text-foreground/70;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+  margin-bottom: 20px
+}
+
+.article p:first-letter,article p:first-letter {
+  text-transform: capitalize
+}
+
+.article p:last-of-type,article p:last-of-type {
+  margin-bottom: 0
+}
+
+.article h1,.article h2,.article h3,article h1,article h2,article h3 {
+  font-weight: 600;
+  line-height: 1;
+  margin: 10px 0 20px
+}
+
+.article h1,article h1 {
+  font-size: 36px
+}
+
+.article h2,article h2 {
+  font-size: 32px
+}
+
+.article h3,article h3 {
+  font-size: 24px
+}
+
+.article ol,.article ul,article ol,article ul {
+  margin: 10px 0 40px
+}
+
+.article ol li,.article ul li,article ol li,article ul li {
+  @apply text-foreground/70;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+  list-style: disc;
+  margin-bottom: 8px;
+  margin-left: 20px
+}
+
+.article ol li:first-letter,.article ul li:first-letter,article ol li:first-letter,article ul li:first-letter {
+  text-transform: capitalize
+}
+
+.article ol li,article ol li {
+  list-style: auto
+}
+
+.article a,article a {
+  color: var(--color-primary);
+  font-weight: 600
+}
+

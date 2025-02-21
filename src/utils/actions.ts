@@ -15,7 +15,12 @@ const GenerateProgram = (item: any) => {
       ...item.category,
       image: `${BACKENDURL}/upload/${item.category.image}`,
     },
-    images: item.images.map((image: string) => `${BACKENDURL}/upload${image}`),
+    images: item.images.map((image: string) =>
+      image.startsWith("http") ? image : `${BACKENDURL}/upload${image}`,
+    ),
+    icon: item.icon.startsWith("http")
+      ? item.icon
+      : `${BACKENDURL}/upload${item.icon}`,
   };
 };
 //#endregion
@@ -37,9 +42,6 @@ const get_SubCategories = async (perPage = 10) => {
     image: `${BACKENDURL}/upload/${item.image}`,
   }));
 };
-
-
-
 
 interface Get_appPropt {
   search?: string;
@@ -69,4 +71,4 @@ const get_by_slug = async (slug: string) => {
   return GenerateProgram(res);
 };
 
-export { get_Categories, get_application,get_by_slug,get_SubCategories };
+export { get_Categories, get_application, get_by_slug, get_SubCategories };

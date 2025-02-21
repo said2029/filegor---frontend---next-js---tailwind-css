@@ -6,8 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { cache } from "react";
 import { CiClock2 } from "react-icons/ci";
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaStar } from "react-icons/fa";
 import { SiUtorrent } from "react-icons/si";
+import { config } from "@/utils/contents";
 
 const Application = cache(async (slug: string) => {
   return await get_by_slug(slug);
@@ -67,7 +68,7 @@ export async function generateMetadata({
 }
 
 export default async function page({ params }: { params: any }) {
-  const { slug, category, locale } =await params;
+  const { slug, category, locale } = await params;
   const program = await Application(slug);
   const related = await get_application({
     topDownloads: true,
@@ -99,11 +100,14 @@ export default async function page({ params }: { params: any }) {
       <section className="container mt-10 grid w-screen lg:grid-cols-3 lg:gap-10">
         <main className="w-screen space-y-3 px-4 md:px-0 lg:col-span-2 lg:w-full">
           <div className="rounded-lg border border-black/10 bg-white px-4 py-5">
-            <h1 className="text-3xl">{program?.title}</h1>
+            <h1 className="text-3xl">
+              {program?.title} - {config.websiteName}
+            </h1>
             <p className="mt-3 opacity-65">{program?.subtitle}</p>
             <Slider_Images images={program?.images} />
 
             <div
+              className="article"
               dangerouslySetInnerHTML={{ __html: program.description }}
             ></div>
           </div>
@@ -187,10 +191,40 @@ export default async function page({ params }: { params: any }) {
         </main>
 
         <aside className="space-y-6 px-4 md:px-0">
-          <div className="w-full rounded-lg border border-black/10 bg-white px-3 py-5 text-center">
+          <div className="flex w-full flex-col justify-center rounded-lg border border-black/10 bg-white px-3 py-5 text-center">
             <h1 className="text-6xl font-medium text-black">
               {program.size} <span className="text-xl">{program.sizeType}</span>
             </h1>
+            {program?.rate.average != 0 && (
+              <>
+                <div className="mt-3 flex items-center justify-center gap-3">
+                  <div className="flex items-center gap-1">
+                    <div className="rounded-s-full bg-primary px-2 text-sm text-white">
+                      {program?.rate.average}
+                    </div>
+                    <p className="text-sm font-medium">
+                      {program?.rate.ratings_cast}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: program.rate.average }).map(
+                      (item, index) => (
+                        <FaStar
+                          size={16}
+                          className="text-yellow-500"
+                          key={index}
+                        />
+                      ),
+                    )}
+                    {Array.from({
+                      length: 5 - Math.floor(program.rate.average),
+                    }).map((item, index) => (
+                      <FaStar size={16} className="text-gray-500" key={index} />
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
             <hr className="my-5" />
 
             <div className="w-full space-y-2 px-4 lg:px-10">
@@ -303,7 +337,7 @@ export default async function page({ params }: { params: any }) {
           </div>
 
           <div className="rounded-lg border border-black/10 bg-white p-3">
-            <h2 className="text-2xl">Pc Games</h2>
+            <h2 className="text-2xl">Related</h2>
             <hr />
             <div>
               {related?.map((item, index) => (
