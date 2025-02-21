@@ -33,16 +33,24 @@ export default async function page({
               </li>
               <li>{">"}</li>
               <li>
-                <Link href={`/${locale}/category/${decodeURI(category[0])}`}>
+                <Link
+                  className="first-letter:uppercase"
+                  href={`/${locale}/category/${decodeURI(category[0])}`}
+                >
                   {decodeURI(category[0])}
                 </Link>
               </li>
-              <li>{">"}</li>
-              <Link
-                href={`/${locale}/category/${category[0]}/${decodeURI(category[1])}`}
-              >
-                {decodeURI(category[1])}
-              </Link>
+              {category[1] && (
+                <>
+                  <li>{">"}</li>
+                  <Link
+                    className="first-letter:uppercase"
+                    href={`/${locale}/category/${category[0]}/${decodeURI(category[1])}`}
+                  >
+                    {decodeURI(category[1])}
+                  </Link>
+                </>
+              )}
             </ul>
           </div>
         </div>
@@ -80,7 +88,7 @@ export default async function page({
             <div className="space-y-7">
               {categoris
                 ?.find((item: any) => item.slug == category[0])
-                ?.subcategory?.map((subCat: any) => (
+                ?.subCategory?.map((subCat: any) => (
                   <Link
                     href={`/${locale}/category/${category[0]}/${subCat.slug}`}
                     key={subCat.id}

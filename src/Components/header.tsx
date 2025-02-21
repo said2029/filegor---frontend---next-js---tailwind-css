@@ -45,7 +45,6 @@ export default function Header() {
             <input
               onKeyUp={(event) => {
                 if (event.key === "Enter") {
-                  console.log(event);
                   const q = event.currentTarget.value;
                   StartSearchPinding(() => {
                     router.push(`/${locale}/search?q=${q}`);

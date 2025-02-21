@@ -86,3 +86,11 @@ body {
 .category-header-item:hover img {
   filter: invert(1);
 }
+
+::-webkit-scrollbar {
+  @apply w-1;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary;
+}
