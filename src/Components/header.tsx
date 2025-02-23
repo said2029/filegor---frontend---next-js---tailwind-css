@@ -20,9 +20,9 @@ export default function Header() {
   const [isSearchPinding, StartSearchPinding] = useTransition();
   const [ShowNavMobile, setShowNavMobile] = useState(false);
   return (
-    <header className="w-screen overflow-hidden bg-white md:px-0">
+    <header className="overflow-hidden bg-white md:px-0 w-screen">
       {/* top */}
-      <div className="container z-[70] flex items-center justify-between bg-white px-4 py-4">
+      <div className="container z-[70] flex items-center justify-between px-4 py-4">
         <div className="flex w-fit items-center gap-3 overflow-hidden">
           <Link
             href={"/"}

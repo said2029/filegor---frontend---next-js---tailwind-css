@@ -7,7 +7,7 @@ export default function Slider_Images({ images }: { images: string[] }) {
     <Carousel opts={{
         align:"center"
     }} className="w-full overflow-hidden my-5">
-      <CarouselContent className="h-[370px]">
+      <CarouselContent >
         {images.map((image: string, index: number) => (
           <CarouselItem
             key={index}

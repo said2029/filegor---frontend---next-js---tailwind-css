@@ -18,7 +18,7 @@ export default async function Home({ params }: { params: any }) {
   });
   const Android = await get_application({
     perPage: 10,
-    category: "Android",
+    category: "android-apps",
     topDownloads: true,
   });
   const pc_games = await get_application({

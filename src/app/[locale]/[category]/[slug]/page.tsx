@@ -76,8 +76,8 @@ export default async function page({ params }: { params: any }) {
     category: category,
   });
   return (
-    <div>
-      <div className="w-screen bg-gradient-to-r from-blue-500 to-teal-500 py-5">
+    <main>
+      <div className="bg-gradient-to-r from-blue-500 to-teal-500 py-5">
         <div className="container flex flex-col items-center justify-between gap-2 text-center md:flex-row md:text-start">
           <h1 className="text-2xl text-white">{program.title}</h1>
           <div>
@@ -98,8 +98,8 @@ export default async function page({ params }: { params: any }) {
         </div>
       </div>
 
-      <section className="container mt-10 grid w-screen lg:grid-cols-3 lg:gap-10">
-        <main className="w-screen space-y-3 px-4 md:px-0 lg:col-span-2 lg:w-full">
+      <section className="container mt-10 lg:gap-5 flex flex-col lg:flex-row">
+        <main className="space-y-3 flex-shrink px-4 md:px-0">
           <div className="rounded-lg border border-black/10 bg-white px-4 py-5">
             <h1 className="text-3xl">
               {program?.title} - {config.websiteName}
@@ -140,7 +140,7 @@ export default async function page({ params }: { params: any }) {
           </div>
         </main>
 
-        <aside className="space-y-6 px-4 md:px-0">
+        <aside className="space-y-6 px-4 md:px-0 min-w-80">
           <div className="flex w-full flex-col justify-center rounded-lg border border-black/10 bg-white px-3 py-5 text-center">
             <h1 className="text-6xl font-medium text-black">
               {program.size} <span className="text-xl">{program.sizeType}</span>
@@ -269,7 +269,7 @@ export default async function page({ params }: { params: any }) {
             <div>
               {related?.map((item, index) => (
                 <Link
-                  href={`/${locale}/${item.category.name}/${item.slug}`}
+                  href={`/${locale}/${item.category.slug}/${item.slug}`}
                   key={index}
                   className="mt-7 flex gap-2"
                 >
@@ -301,6 +301,6 @@ export default async function page({ params }: { params: any }) {
           </div>
         </aside>
       </section>
-    </div>
+    </main>
   );
 }

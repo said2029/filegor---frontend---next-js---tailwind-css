@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 
 export default async function Footer({ locale = "en" }: { locale: string }) {
-  const topCategorys = await get_Categories();
+  const topCategorys = await get_Categories(3);
   const date = new Date();
   return (
     <footer className="mt-60 w-screen overflow-hidden bg-black pt-10 text-white hover:[&_a]:text-white">
@@ -13,15 +13,13 @@ export default async function Footer({ locale = "en" }: { locale: string }) {
           <ul>
             <li>Download Software</li>
             <div className="mt-3 space-y-1 text-white/65">
-              {topCategorys
-                .slice(0, 3)
-                .map((cat: { name: string; id: string }) => (
-                  <li key={cat.id}>
-                    <Link href={`/${locale}/category/${cat.name}`}>
-                      {cat.name}
-                    </Link>
-                  </li>
-                ))}
+              {topCategorys.map((cat: { name: string; slug: string }) => (
+                <li key={cat.slug}>
+                  <Link href={`/${locale}/category/${cat.slug}`}>
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
             </div>
           </ul>
           <ul>

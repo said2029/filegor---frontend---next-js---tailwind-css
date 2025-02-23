@@ -14,7 +14,7 @@ export default function Main_Card({
 }) {
   return (
     <Link
-      href={`/${locale}/${item.category.name}/${item.slug}`}
+      href={`/${locale}/${item.category.slug}/${item.slug}`}
       className="flex flex-col items-center justify-between gap-3 border border-black/10 bg-white p-3 md:flex-row"
     >
       <div className="flex w-full max-w-[500px] gap-2">
