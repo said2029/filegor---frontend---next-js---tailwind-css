@@ -3,17 +3,31 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { Loader2 } from "lucide-react";
 import { motion } from "motion/react";
-import Link from "next/link";
 import { GoDownload } from "react-icons/go";
 import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import { incrementDownload } from "@/utils/actions";
 
-export default function ButtonDownload({ link }: { link: string }) {
+export default function ButtonDownload() {
   const [CanDownload, setCanDownload] = useState(false);
-  const t =useTranslations("download-page");
+  const t = useTranslations("download-page");
+  const { slug }: { slug: string } = useParams();
+
+  const handleDownload = async () => {
+    const link = sessionStorage.getItem("downloadUrl");
+    if (!link) return;
+    if (slug) await incrementDownload(slug);
+    const a = document.createElement("a");
+    a.setAttribute("download", "file.zip");
+    a.setAttribute("href", link);
+    document.body.append(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   return (
-    <Link
-      target="_blank"
-      href={link}
+    <button
+      onClick={handleDownload}
       className={clsx(
         "flex h-[50px] w-fit justify-center overflow-hidden rounded-full bg-teal-600 px-3 py-3 text-white transition-all",
         {
@@ -46,6 +60,6 @@ export default function ButtonDownload({ link }: { link: string }) {
           <p>{t("download")}</p>{" "}
         </li>
       </motion.ul>
-    </Link>
+    </button>
   );
 }

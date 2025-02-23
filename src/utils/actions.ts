@@ -2,8 +2,8 @@
 "use server";
 const BACKENDURL = process.env.BACKEND_URL;
 //#region  halpers
-const FetchHalper = async (path: string) => {
-  return await fetch(BACKENDURL + `/api/${path}`)
+const FetchHalper = async (path: string, header?: RequestInit) => {
+  return await fetch(BACKENDURL + `/api/${path}`, header)
     .then((res) => res.json())
     .then((res) => res)
     .catch((err) => err);
@@ -65,10 +65,21 @@ const get_application = async ({
   if (!res || !Array.isArray(res)) return;
   return res?.map((item: any) => GenerateProgram(item));
 };
+const incrementDownload = async (slug: string) => {
+  return await FetchHalper(`program/incrementDownload/${slug}`, {
+    method: "PUT",
+  });
+};
 
 const get_by_slug = async (slug: string) => {
   const res = await FetchHalper(`program/slug/${slug}`);
   return GenerateProgram(res);
 };
 
-export { get_Categories, get_application, get_by_slug, get_SubCategories };
+export {
+  get_Categories,
+  get_application,
+  incrementDownload,
+  get_by_slug,
+  get_SubCategories,
+};

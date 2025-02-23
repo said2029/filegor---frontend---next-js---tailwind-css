@@ -6,9 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { cache } from "react";
 import { CiClock2 } from "react-icons/ci";
-import { FaDownload, FaStar } from "react-icons/fa";
-import { SiUtorrent } from "react-icons/si";
 import { config } from "@/utils/contents";
+import VersionList from "./_components/VersionList";
+import AsideDownloadButton from "./_components/asideDownloadButton";
+import { FaStar } from "react-icons/fa";
 
 const Application = cache(async (slug: string) => {
   return await get_by_slug(slug);
@@ -128,62 +129,11 @@ export default async function page({ params }: { params: any }) {
                   </tr>
                 </thead>
                 <tbody className="mt-7 block space-y-4">
-                  {program.versions.map(
-                    (ver: {
-                      id: string;
-                      createAt: string;
-                      fullName: string;
-                      versionName: string;
-                      links: string[];
-                      torrents: string[];
-                    }) => (
-                      <tr key={ver.id} className="flex justify-between">
-                        <td className="w-28 text-sm opacity-80">
-                          {ver.createAt}
-                        </td>
-                        <td>
-                          <ul className="space-y-2">
-                            <li className="flex items-center gap-2">
-                              <h6 className="text-sm font-medium opacity-85">
-                                File Name:{" "}
-                              </h6>
-                              <p className="text-xs font-semibold opacity-60">
-                                {ver.fullName}
-                              </p>
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <h6 className="text-sm font-medium opacity-85">
-                                Version:
-                              </h6>
-                              <p className="text-xs font-semibold opacity-60">
-                                {ver.versionName}
-                              </p>
-                            </li>
-                          </ul>
-                        </td>
-                        <td className="flex items-center gap-1">
-                          {ver.links.map((link: string, index: number) => (
-                            <Link
-                              key={link + index}
-                              className="grid size-9 place-content-center rounded-lg bg-teal-600 text-white"
-                              href={`/${locale}/${program?.category?.name}/${slug}/file-download/?u=${link}`}
-                            >
-                              <FaDownload />
-                            </Link>
-                          ))}
-                          {ver.torrents.map((link: string, index: number) => (
-                            <Link
-                              key={link + index}
-                              className="grid size-9 place-content-center rounded-lg bg-teal-600 text-white"
-                              href={`/${locale}/${program?.category?.name}/${slug}/file-download/?u=${link}`}
-                            >
-                              <SiUtorrent />
-                            </Link>
-                          ))}
-                        </td>
-                      </tr>
-                    ),
-                  )}
+                  <VersionList
+                    category={program.category.slug}
+                    program={program}
+                    locale={locale}
+                  />
                 </tbody>
               </table>
             </div>
@@ -200,7 +150,7 @@ export default async function page({ params }: { params: any }) {
                 <div className="mt-3 flex items-center justify-center gap-3">
                   <div className="flex items-center gap-1">
                     <div className="rounded-s-full bg-primary px-2 text-sm text-white">
-                      {program?.rate.average}
+                      {program?.rate.average.toFixed(2)}
                     </div>
                     <p className="text-sm font-medium">
                       {program?.rate.ratings_cast}
@@ -227,30 +177,7 @@ export default async function page({ params }: { params: any }) {
             )}
             <hr className="my-5" />
 
-            <div className="w-full space-y-2 px-4 lg:px-10">
-              {program?.versions?.[0]?.links.map(
-                (link: string, index: number) => (
-                  <Link
-                    key={index}
-                    className="block w-full rounded-md bg-zinc-800 py-3 text-sm font-semibold text-white"
-                    href={`/${locale}/${program?.category?.name}/${slug}/file-download/?u=${link}`}
-                  >
-                    Direct Download
-                  </Link>
-                ),
-              )}
-              {program?.versions?.[0]?.torrents.map(
-                (link: string, index: number) => (
-                  <Link
-                    key={index}
-                    className="block w-full rounded-md bg-[#74b23e] py-3 text-sm font-semibold text-white"
-                    href={`/${locale}/${program?.category?.name}/${slug}/file-download/?u=${link}`}
-                  >
-                    Torrent Download
-                  </Link>
-                ),
-              )}
-            </div>
+            <AsideDownloadButton locale={locale} program={program} />
 
             <div className="mt-7 grid place-content-center text-teal-600">
               <a

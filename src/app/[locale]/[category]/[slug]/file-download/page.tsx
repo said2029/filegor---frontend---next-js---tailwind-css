@@ -2,25 +2,26 @@
 import React from "react";
 import { FiDownloadCloud } from "react-icons/fi";
 import ButtonDownload from "./_components/ButtonDownload";
-import { get_application, get_by_slug } from "@/utils/actions";
 import { Link } from "lucide-react";
-import Main_Card from "@/Components/Cards/Main_Card";
-import { redirect } from "next/navigation";
+import { get_application, get_by_slug } from "@/utils/actions";
 import { getTranslations } from "next-intl/server";
+import Main_Card from "@/Components/Cards/Main_Card";
+
 
 export default async function Page({
   params,
-  searchParams,
+  locale,
 }: {
   params: any;
-  searchParams: any;
+  locale: string;
 }) {
   const t = await getTranslations("download-page");
-  const { slug, locale, category } = await params;
-  const { u } = await searchParams;
-  if (!u) return redirect(`/${locale}/${category}/${slug}`);
-  const program = await get_by_slug(slug);
-  const related = await get_application({
+
+  const { slug }: { slug: string } = await params;
+  // const { slug, locale, category } = await params;
+
+  const program: any = await get_by_slug(slug);
+  const related: any = await get_application({
     topDownloads: true,
     category: program.category.slug,
   });
@@ -39,7 +40,7 @@ export default async function Page({
         </div>
 
         <div className="mt-10 w-fit">
-          <ButtonDownload link={u} />
+          <ButtonDownload />
         </div>
 
         <div>
@@ -58,7 +59,7 @@ export default async function Page({
 
         <div className="mt-5 space-y-4">
           {related &&
-            related?.map((item) => (
+            related?.map((item: any) => (
               <Main_Card key={item.id} item={item} locale={locale} />
             ))}
         </div>
