@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [process.env.NEXT_DOMAIN, "media.imgcdn.org"],
+    domains: [process.env.NEXT_DOMAIN_BACKEND, "media.imgcdn.org"],
   },
   async headers() {
     return [
