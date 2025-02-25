@@ -15,7 +15,8 @@ const Application = cache(async (slug: string) => {
   return await get_by_slug(slug);
 });
 
-export async function generateStaticParams() {
+export async function generateStaticParams({ params }: { params: any }) {
+  const { category, locale } = await params;
   const applications = await get_application({
     topDownloads: false,
     perPage: 100,
@@ -24,8 +25,8 @@ export async function generateStaticParams() {
     applications?.map((app: any) => ({
       slug: app.slug,
       category: app.category.slug,
-      locale: "en",
-    })) ?? []
+      locale: locale,
+    })) ?? [{ slug: null, locale: locale, category: category }]
   );
 }
 
@@ -70,6 +71,7 @@ export async function generateMetadata({
 
 export default async function page({ params }: { params: any }) {
   const { slug, category, locale } = await params;
+  if (!slug) return;
   const program = await Application(slug);
   const related = await get_application({
     topDownloads: true,
@@ -98,8 +100,8 @@ export default async function page({ params }: { params: any }) {
         </div>
       </div>
 
-      <section className="container mt-10 lg:gap-5 flex flex-col lg:flex-row">
-        <main className="space-y-3 flex-shrink px-4 md:px-0">
+      <section className="container mt-10 flex flex-col lg:flex-row lg:gap-5">
+        <main className="flex-shrink space-y-3 px-4 md:px-0">
           <div className="rounded-lg border border-black/10 bg-white px-4 py-5">
             <h1 className="text-3xl">
               {program?.title} - {config.websiteName}
@@ -140,7 +142,7 @@ export default async function page({ params }: { params: any }) {
           </div>
         </main>
 
-        <aside className="space-y-6 px-4 md:px-0 min-w-80">
+        <aside className="min-w-80 space-y-6 px-4 md:px-0">
           <div className="flex w-full flex-col justify-center rounded-lg border border-black/10 bg-white px-3 py-5 text-center">
             <h1 className="text-6xl font-medium text-black">
               {program.size} <span className="text-xl">{program.sizeType}</span>

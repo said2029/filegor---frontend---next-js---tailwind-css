@@ -7,17 +7,10 @@ import { get_application, get_by_slug } from "@/utils/actions";
 import { getTranslations } from "next-intl/server";
 import Main_Card from "@/Components/Cards/Main_Card";
 
-
-export default async function Page({
-  params,
-  locale,
-}: {
-  params: any;
-  locale: string;
-}) {
+export default async function Page({ params }: { params: any }) {
   const t = await getTranslations("download-page");
 
-  const { slug }: { slug: string } = await params;
+  const { slug, locale }: { slug: string; locale: string } = await params;
   // const { slug, locale, category } = await params;
 
   const program: any = await get_by_slug(slug);
