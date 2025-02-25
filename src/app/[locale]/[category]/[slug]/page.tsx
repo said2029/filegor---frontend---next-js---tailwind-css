@@ -147,36 +147,42 @@ export default async function page({ params }: { params: any }) {
             <h1 className="text-6xl font-medium text-black">
               {program.size} <span className="text-xl">{program.sizeType}</span>
             </h1>
-            {program?.rate?.average && program?.rate?.average != 0 && (
-              <>
-                <div className="mt-3 flex items-center justify-center gap-3">
-                  <div className="flex items-center gap-1">
-                    <div className="rounded-s-full bg-primary px-2 text-sm text-white">
-                      {program?.rate.average.toFixed(2)}
+            {program?.rate &&
+              program?.rate?.average &&
+              program?.rate?.average != 0 && (
+                <>
+                  <div className="mt-3 flex items-center justify-center gap-3">
+                    <div className="flex items-center gap-1">
+                      <div className="rounded-s-full bg-primary px-2 text-sm text-white">
+                        {program?.rate.average.toFixed(2)}
+                      </div>
+                      <p className="text-sm font-medium">
+                        {program?.rate.ratings_cast}
+                      </p>
                     </div>
-                    <p className="text-sm font-medium">
-                      {program?.rate.ratings_cast}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {Array.from({ length: program.rate.average }).map(
-                      (item, index) => (
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: program.rate.average }).map(
+                        (item, index) => (
+                          <FaStar
+                            size={16}
+                            className="text-yellow-500"
+                            key={index}
+                          />
+                        ),
+                      )}
+                      {Array.from({
+                        length: 5 - Math.floor(program.rate.average),
+                      }).map((item, index) => (
                         <FaStar
                           size={16}
-                          className="text-yellow-500"
+                          className="text-gray-500"
                           key={index}
                         />
-                      ),
-                    )}
-                    {Array.from({
-                      length: 5 - Math.floor(program.rate.average),
-                    }).map((item, index) => (
-                      <FaStar size={16} className="text-gray-500" key={index} />
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </>
-            )}
+                </>
+              )}
             <hr className="my-5" />
 
             <AsideDownloadButton locale={locale} program={program} />
