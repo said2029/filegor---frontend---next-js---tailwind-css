@@ -147,7 +147,7 @@ export default async function page({ params }: { params: any }) {
             <h1 className="text-6xl font-medium text-black">
               {program.size} <span className="text-xl">{program.sizeType}</span>
             </h1>
-            {program?.rate.average != 0 && (
+            {program?.rate?.average && program?.rate?.average != 0 && (
               <>
                 <div className="mt-3 flex items-center justify-center gap-3">
                   <div className="flex items-center gap-1">

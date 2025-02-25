@@ -58,7 +58,7 @@ export default function Main_Card({
         </div>
 
         <hr className="h-full border border-black" />
-        {item?.rate.average != 0 && (
+        {item?.rate?.average != 0 && (
           <>
             <div className="space-y-2 text-center">
               <h3>Reputation</h3>
