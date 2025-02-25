@@ -28,7 +28,7 @@ export default async function Home({ params }: { params: any }) {
   });
 
   return (
-    <main className="w-screen overflow-hidden px-4 md:px-0">
+    <main className="w-screen  px-4 md:px-0">
       <section className="container flex flex-col gap-7 lg:flex-row">
         <div className="mt-10 w-full space-y-10">
           {/* Windows */}

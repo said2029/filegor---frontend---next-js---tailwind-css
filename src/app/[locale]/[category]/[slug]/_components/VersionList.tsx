@@ -76,25 +76,26 @@ export default function VersionList({
           </tr>
         ),
       )}
-      <tr className="flex justify-between">
-        <td className="w-28 text-sm opacity-80">{}</td>
-        <td colSpan={2}>
-          <h6 className="text-sm font-medium opacity-85">File Name: </h6>
-          <p className="text-xs font-semibold opacity-60">
-            if other linke not working you can try this
-          </p>
-        </td>
-        <td className="flex items-center gap-1">
-          <button
-            className="grid size-9 place-content-center rounded-lg bg-teal-600 text-white"
-            onClick={() =>
-              handleDewnload(`https://filecr.com/${category}/${slug}`)
-            }
-          >
-            <FaDownload />
-          </button>
-        </td>
-      </tr>
+      {program.icon.includes("media.imgcdn") && (
+        <tr className="flex justify-between">
+          <td colSpan={2}>
+            <h6 className="text-sm font-medium opacity-85">File Name: </h6>
+            <p className="text-xs font-semibold opacity-60">
+              if other linke not working you can try this
+            </p>
+          </td>
+          <td className="flex items-center gap-1">
+            <button
+              className="grid size-9 place-content-center rounded-lg bg-teal-600 text-white"
+              onClick={() =>
+                handleDewnload(`https://filecr.com/${category}/${slug}`)
+              }
+            >
+              <FaDownload />
+            </button>
+          </td>
+        </tr>
+      )}
     </>
   );
 }

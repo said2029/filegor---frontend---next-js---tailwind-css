@@ -40,7 +40,7 @@ export default function ButtonDownload() {
           init: { y: "0px" },
           step1: {
             y: "-37px",
-            transition: { delay: 10 },
+            transition: { delay: 5 },
           },
         }}
         initial="init"
