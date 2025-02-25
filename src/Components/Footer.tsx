@@ -13,7 +13,7 @@ export default async function Footer({ locale = "en" }: { locale: string }) {
           <ul>
             <li>Download Software</li>
             <div className="mt-3 space-y-1 text-white/65">
-              {topCategorys.map((cat: { name: string; slug: string }) => (
+              {topCategorys?.map((cat: { name: string; slug: string }) => (
                 <li key={cat.slug}>
                   <Link href={`/${locale}/category/${cat.slug}`}>
                     {cat.name}

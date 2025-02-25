@@ -27,7 +27,7 @@ const GenerateProgram = (item: any) => {
 
 const get_Categories = async (perPage = 10) => {
   const res = await FetchHalper(`category?perPage=${perPage}`);
-  if (!res) return null;
+  if (!res||!Array.isArray(res)) return [];
   return res?.map((item: any) => ({
     ...item,
     image: `${BACKENDURL}/upload/${item.image}`,

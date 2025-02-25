@@ -71,7 +71,7 @@ export default function Header() {
       <hr className="h-[0.5px] border-black/10" />
 
       <div className="container hidden items-center justify-between md:flex">
-        {category.map((item: any) => (
+        {category?.map((item: any) => (
           <Link
             key={item?.id}
             className="category-header-item flex h-full flex-grow items-center justify-center gap-2 border-x-[0.2px] border-black/15 py-4 opacity-80 transition-all hover:bg-primary hover:text-white"
