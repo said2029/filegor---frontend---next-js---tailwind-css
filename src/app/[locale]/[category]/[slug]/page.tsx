@@ -10,13 +10,13 @@ import { config } from "@/utils/contents";
 import VersionList from "./_components/VersionList";
 import AsideDownloadButton from "./_components/asideDownloadButton";
 import { FaStar } from "react-icons/fa";
+export const revalidate = 3600 
 
 const Application = cache(async (slug: string) => {
   return await get_by_slug(slug);
 });
 
-export async function generateStaticParams({ params }: { params: any }) {
-  const { category, locale } = await params;
+export async function generateStaticParams() {
   const applications = await get_application({
     topDownloads: false,
     perPage: 100,
@@ -25,8 +25,8 @@ export async function generateStaticParams({ params }: { params: any }) {
     applications?.map((app: any) => ({
       slug: app.slug,
       category: app.category.slug,
-      locale: locale,
-    })) ?? [{ slug: null, locale: locale, category: category }]
+      locale: "en",
+    })) ?? []
   );
 }
 
