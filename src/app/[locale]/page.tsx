@@ -104,7 +104,7 @@ export default async function Home({ params }: { params: any }) {
                     width={74}
                     height={74}
                     alt={item?.title}
-                    src={item?.images[0]}
+                    src={item?.icon}
                   />
                 </div>
                 <div>
