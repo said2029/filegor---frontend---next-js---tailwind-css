@@ -16,9 +16,9 @@ const GenerateProgram = (item: any) => {
       image: `${BACKENDURL}/upload/${item.category.image}`,
     },
     images: item.images.map((image: string) =>
-      image.startsWith("http") ? image : `${BACKENDURL}/upload${image}`,
+      image?.startsWith("http") ? image : `${BACKENDURL}/upload${image}`,
     ),
-    icon: item.icon.startsWith("http")
+    icon: item?.icon?.startsWith("http")
       ? item.icon
       : `${BACKENDURL}/upload${item.icon}`,
   };
