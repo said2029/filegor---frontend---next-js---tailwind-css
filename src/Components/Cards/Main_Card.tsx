@@ -17,7 +17,7 @@ export default function Main_Card({
       href={`/${locale}/${item.category.slug}/${item.slug}`}
       className="flex flex-col items-center justify-between gap-3 border border-black/10 bg-white p-3 md:flex-row"
     >
-      <div className="flex w-full max-w-[500px] gap-2">
+      <div className="flex w-full gap-2">
         <div className="aspect-square min-w-[74px] overflow-hidden rounded-md bg-gray-200">
           <Image
             className="size-full object-cover"
